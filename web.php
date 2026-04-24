@@ -9,10 +9,6 @@ Route::get('/', function () {
     return view('home', compact('articles'));
 })->name('home');
 
-Route::middleware(['auth', 'verified'])->group(function () {
-    Route::view('/dashboard', 'dashboard')->name('dashboard');
-});
-
 Route::middleware('auth')->group(function () {
 
     Route::get('/articles/create', function () {
@@ -23,7 +19,7 @@ Route::middleware('auth')->group(function () {
         Article::create([
             'title' => $request->title,
             'body' => $request->body,
-            'user_id' => auth()->id(),
+            'user_id' => 1,
         ]);
 
         return redirect('/');
